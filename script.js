@@ -63,17 +63,20 @@ class Myndbandaleiga {
   createVideoCategory(title, videos) {
     const categoryDiv = document.createElement('div');
     const category = document.createElement('h2');
+    const posterDiv = document.createElement('div');
 
     categoryDiv.className = 'video__category';
+    posterDiv.className = 'video__posters';
     category.textContent = title;
 
     categoryDiv.appendChild(category);
 
     for (const key in videos) {
       const video = videos[key];
-      categoryDiv.appendChild(this.createPoster(video.poster, video.title, video.date));
+      posterDiv.appendChild(this.createPoster(video.poster, video.title, video.date));
     }
 
+    categoryDiv.appendChild(posterDiv);
     this.container.appendChild(categoryDiv);
   }
 

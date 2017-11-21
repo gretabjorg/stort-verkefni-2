@@ -70,17 +70,20 @@ var Myndbandaleiga = function () {
     value: function createVideoCategory(title, videos) {
       var categoryDiv = document.createElement('div');
       var category = document.createElement('h2');
+      var posterDiv = document.createElement('div');
 
       categoryDiv.className = 'video__category';
+      posterDiv.className = 'video__posters';
       category.textContent = title;
 
       categoryDiv.appendChild(category);
 
       for (var key in videos) {
         var video = videos[key];
-        categoryDiv.appendChild(this.createPoster(video.poster, video.title, video.date));
+        posterDiv.appendChild(this.createPoster(video.poster, video.title, video.date));
       }
 
+      categoryDiv.appendChild(posterDiv);
       this.container.appendChild(categoryDiv);
     }
 

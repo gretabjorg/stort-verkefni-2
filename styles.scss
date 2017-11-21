@@ -4,12 +4,14 @@
 }
 
 .video__category {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-
 }
+
+.video__posters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .video__poster {
   width: 50%;
   height: auto;
