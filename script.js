@@ -8,23 +8,52 @@ class Myndbandaleiga {
   load() {
     this.container = document.querySelector('main');
 
-    const videosNytt = [
-      { 'poster': './videos/small.png', 'title': 'Lego!', 'date': 1509804047011},
-      { 'poster': './videos/bunny.png', 'title': 'Big Bunny', 'date': 1507804047011}
+    const videosNytt = [{
+        'poster': './videos/small.png',
+        'title': 'Lego!',
+        'date': 1509804047011
+      },
+      {
+        'poster': './videos/bunny.png',
+        'title': 'Big Bunny',
+        'date': 1507804047011
+      }
     ];
     this.createVideoCategory('Nýleg myndbönd', videosNytt);
 
-    const videosKennsla = [
-      { 'poster': './videos/small.png', 'title': 'Lego!', 'date': 1509804047011},
-      { 'poster': './videos/16-9.png', 'title': 'Prufu myndband', 'date': 1505904047011},
-      { 'poster': './videos/16-9.png', 'title': 'Prufu myndband með löngum texta sem fer í tvær línur', 'date': 1504904047011}
+    const videosKennsla = [{
+        'poster': './videos/small.png',
+        'title': 'Lego!',
+        'date': 1509804047011
+      },
+      {
+        'poster': './videos/16-9.png',
+        'title': 'Prufu myndband',
+        'date': 1505904047011
+      },
+      {
+        'poster': './videos/16-9.png',
+        'title': 'Prufu myndband með löngum texta sem fer í tvær línur',
+        'date': 1504904047011
+      }
     ];
     this.createVideoCategory('Kennslumyndbönd', videosKennsla);
 
-    const videosSkemmti = [
-      { 'poster': './videos/bunny.png', 'title': 'Big Bunny', 'date': 1507804047011},
-      { 'poster': './videos/16-9.png', 'title': 'Prufu myndband', 'date': 1505904047011},
-      { 'poster': './videos/16-9.png', 'title': 'Prufu myndband með löngum texta sem fer í tvær línur', 'date': 1504904047011}
+    const videosSkemmti = [{
+        'poster': './videos/bunny.png',
+        'title': 'Big Bunny',
+        'date': 1507804047011
+      },
+      {
+        'poster': './videos/16-9.png',
+        'title': 'Prufu myndband',
+        'date': 1505904047011
+      },
+      {
+        'poster': './videos/16-9.png',
+        'title': 'Prufu myndband með löngum texta sem fer í tvær línur',
+        'date': 1504904047011
+      }
     ];
     this.createVideoCategory('Skemmtimyndbönd', videosSkemmti);
   }
