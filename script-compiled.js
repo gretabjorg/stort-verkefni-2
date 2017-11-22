@@ -14,53 +14,14 @@ var Myndbandaleiga = function () {
 
 
     // Hleður inn thumbnails: poster, title, date, undir hverju category fyrir sig.
-    // TODO: Lesa inn videos.json
     // TODO: Setja link á poster sem hleður inn öðrum glugga => media palyer.
     // TODO: Bua til videos ut fra videos.json
 
     value: function load() {
       this.container = document.querySelector('main');
-
-      var videosNytt = [{
-        'poster': './videos/small.png',
-        'title': 'Lego!',
-        'date': 1509804047011
-      }, {
-        'poster': './videos/bunny.png',
-        'title': 'Big Bunny',
-        'date': 1507804047011
-      }];
-      this.createVideoCategory('Nýleg myndbönd', videosNytt);
-
-      var videosKennsla = [{
-        'poster': './videos/small.png',
-        'title': 'Lego!',
-        'date': 1509804047011
-      }, {
-        'poster': './videos/16-9.png',
-        'title': 'Prufu myndband',
-        'date': 1505904047011
-      }, {
-        'poster': './videos/16-9.png',
-        'title': 'Prufu myndband með löngum texta sem fer í tvær línur',
-        'date': 1504904047011
-      }];
-      this.createVideoCategory('Kennslumyndbönd', videosKennsla);
-
-      var videosSkemmti = [{
-        'poster': './videos/bunny.png',
-        'title': 'Big Bunny',
-        'date': 1507804047011
-      }, {
-        'poster': './videos/16-9.png',
-        'title': 'Prufu myndband',
-        'date': 1505904047011
-      }, {
-        'poster': './videos/16-9.png',
-        'title': 'Prufu myndband með löngum texta sem fer í tvær línur',
-        'date': 1504904047011
-      }];
-      this.createVideoCategory('Skemmtimyndbönd', videosSkemmti);
+      this.categories = [];
+      this.videos = [];
+      this.loadVideos();
     }
 
     // Býr til category elements í HTML.
@@ -78,9 +39,11 @@ var Myndbandaleiga = function () {
 
       categoryDiv.appendChild(category);
 
+      // TODO: Þarf að þýða video.created yfir í dagsetningu.
+
       for (var key in videos) {
         var video = videos[key];
-        posterDiv.appendChild(this.createPoster(video.poster, video.title, video.date));
+        posterDiv.appendChild(this.createPoster(video.poster, video.title, video.created));
       }
 
       categoryDiv.appendChild(posterDiv);
@@ -111,6 +74,44 @@ var Myndbandaleiga = function () {
       videoPoster.appendChild(videoDate);
 
       return videoPoster;
+    }
+  }, {
+    key: 'loadVideos',
+    value: function loadVideos() {
+      var request = new XMLHttpRequest();
+
+      request.open('GET', './videos.json', true);
+      request.onload = this.parseVideosJson.bind(this);
+
+      request.onerror = function () {
+        console.error('Óþekkt villa');
+        results.appendChild(document.createTextNode('Óþekkt villa'));
+      };
+
+      request.send();
+    }
+  }, {
+    key: 'parseVideosJson',
+    value: function parseVideosJson(e) {
+      var request = e.target;
+      if (request.status >= 200 && request.status < 400) {
+        var data = JSON.parse(request.response);
+        this.categories = data.categories;
+
+        // Geymum video i this.videos array
+        for (var videoKey in data.videos) {
+          this.videos[data.videos[videoKey].id] = data.videos[videoKey];
+        }
+
+        // Buum til category i html fyrir hvert video category
+        for (var i in data.categories) {
+          var videoArray = [];
+          for (var j in data.categories[i].videos) {
+            videoArray.push(this.videos[data.categories[i].videos[j]]);
+          }
+          this.createVideoCategory(data.categories[i].title, videoArray);
+        }
+      }
     }
   }]);
 
