@@ -1,0 +1,32 @@
+.video__category {
+}
+
+.video__posters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.video__poster {
+  margin: 2em;
+  width: 25+%;
+  height: auto;
+}
+
+.poster__img {
+  width: 100%;
+  object-fit: cover;
+  align-items: center;
+}
+
+.fyrirsogn {
+  margin-bottom: 3em;
+}
+
+.video__date {
+  color: #FFF;
+}
+
+.video__title {
+  color: #FFF;
+}
