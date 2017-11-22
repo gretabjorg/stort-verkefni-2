@@ -2,11 +2,15 @@ body {
   background-color: #282828;
 }
 
-h1 {
+h1, h2, a {
   color: #FFF;
 }
 
-h2 {
+.video__category {
   border-bottom: 0.5px solid #FFF;
-  color: #FFF;
+  margin-bottom: 1em;
+}
+
+a {
+  text-decoration: none;
 }
