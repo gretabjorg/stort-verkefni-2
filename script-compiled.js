@@ -73,6 +73,13 @@ var Myndbandaleiga = function () {
       videoPoster.appendChild(videoTitle);
       videoPoster.appendChild(videoDate);
 
+      var target = posterImg;
+      var wrap = document.createElement('a');
+      wrap.setAttribute('href', 'video.html');
+
+      target.parentNode.replaceChild(wrap, target);
+      wrap.appendChild(target);
+
       return videoPoster;
     }
   }, {
