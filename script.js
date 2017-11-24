@@ -11,6 +11,35 @@ class Myndbandaleiga {
     this.loadVideos();
   }
 
+  reiknaDagsetningu(milliseconds) {
+    const days = Math.floor(milliseconds / (1000*60*60*24));
+
+    if (days < 7) {
+      return days + ' dögum';
+    } else if (days < 30) {
+      const weeks = Math.round(milliseconds / (1000*60*60*24*7));
+      if (weeks === 1) {
+        return weeks + ' viku';
+      } else {
+        return weeks + ' vikum';
+      }
+    } else if (days < 365) {
+      const month = Math.round(milliseconds / (1000*60*60*24*30));
+      if (month === 1) {
+        return month + ' mánuði';
+      } else {
+        return month + ' mánuðum';
+      }
+    } else {
+      const year = Math.round(milliseconds / (1000*60*60*24*365));
+      if (year === 1) {
+        return year + ' ári';
+      } else {
+        return year + ' árum';
+      }
+    }
+  }
+
   // Býr til category elements í HTML.
 
   createVideoCategory(title, videos) {
@@ -24,11 +53,11 @@ class Myndbandaleiga {
 
     categoryDiv.appendChild(category);
 
-    // TODO: Þarf að þýða video.created yfir í dagsetningu.
-
     for (const key in videos) {
       const video = videos[key];
-      posterDiv.appendChild(this.createPoster(video.poster, video.title, video.created));
+
+      posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan'));
+      console.log((Date.now() - video.created));
     }
 
     categoryDiv.appendChild(posterDiv);
@@ -41,6 +70,7 @@ class Myndbandaleiga {
     const videoPoster = document.createElement('div');
     const posterImg = document.createElement('img');
     const videoTitle = document.createElement('span');
+    const breakElement = document.createElement('br');
     const videoDate = document.createElement('span');
 
     videoPoster.className = 'video__poster';
@@ -54,6 +84,7 @@ class Myndbandaleiga {
 
     videoPoster.appendChild(posterImg);
     videoPoster.appendChild(videoTitle);
+    videoPoster.appendChild(breakElement);
     videoPoster.appendChild(videoDate);
 
     const target = posterImg;

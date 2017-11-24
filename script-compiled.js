@@ -23,6 +23,36 @@ var Myndbandaleiga = function () {
       this.videos = [];
       this.loadVideos();
     }
+  }, {
+    key: 'reiknaDagsetningu',
+    value: function reiknaDagsetningu(milliseconds) {
+      var days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+
+      if (days < 7) {
+        return days + ' dögum';
+      } else if (days < 30) {
+        var weeks = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 7));
+        if (weeks === 1) {
+          return weeks + ' viku';
+        } else {
+          return weeks + ' vikum';
+        }
+      } else if (days < 365) {
+        var month = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 30));
+        if (month === 1) {
+          return month + ' mánuði';
+        } else {
+          return month + ' mánuðum';
+        }
+      } else {
+        var year = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 365));
+        if (year === 1) {
+          return year + ' ári';
+        } else {
+          return year + ' árum';
+        }
+      }
+    }
 
     // Býr til category elements í HTML.
 
@@ -39,11 +69,11 @@ var Myndbandaleiga = function () {
 
       categoryDiv.appendChild(category);
 
-      // TODO: Þarf að þýða video.created yfir í dagsetningu.
-
       for (var key in videos) {
         var video = videos[key];
-        posterDiv.appendChild(this.createPoster(video.poster, video.title, video.created));
+
+        posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan'));
+        console.log(Date.now() - video.created);
       }
 
       categoryDiv.appendChild(posterDiv);
@@ -58,6 +88,7 @@ var Myndbandaleiga = function () {
       var videoPoster = document.createElement('div');
       var posterImg = document.createElement('img');
       var videoTitle = document.createElement('span');
+      var breakElement = document.createElement('br');
       var videoDate = document.createElement('span');
 
       videoPoster.className = 'video__poster';
@@ -71,6 +102,7 @@ var Myndbandaleiga = function () {
 
       videoPoster.appendChild(posterImg);
       videoPoster.appendChild(videoTitle);
+      videoPoster.appendChild(breakElement);
       videoPoster.appendChild(videoDate);
 
       var target = posterImg;
