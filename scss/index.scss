@@ -31,4 +31,9 @@
 
 .video__title {
   color: #FFF;
+  text-overflow: clip;
+  display: block;
+  white-space: nowrap;
+  font-size: 1.25em;
+  font-weight: bold;
 }
