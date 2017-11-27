@@ -1,6 +1,6 @@
 .video__category {
-  border-bottom: 0.5px solid #eee;
   margin-bottom: 1em;
+  border-bottom: 0.5px solid #eee;
 }
 
 .video__posters {
@@ -10,9 +10,9 @@
 }
 
 .video__poster {
-  margin: 2em;
   width: 25%;
   height: auto;
+  margin: 2em;
 }
 
 .poster__img {
@@ -27,17 +27,18 @@
 }
 
 .video__date {
-  color: #FFF;
+  color: #fff;
 }
 
 .video__title {
   text-align: center;
   color: #FFF;
-  overflow: hidden;
-  text-overflow: clip;
   display: block;
-  white-space: nowrap;
+  overflow: hidden;
   font-weight: bold;
+  color: #fff;
+  text-overflow: clip;
+  white-space: nowrap;
 }
 
 .video__duration {
@@ -48,7 +49,7 @@
 
 }
 
-@media(max-width: 599px) {
+@media (max-width: 599px) {
   .video__poster {
     width: 100%;
   }

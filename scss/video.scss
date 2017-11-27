@@ -24,26 +24,25 @@ a { /* stylelint-disable-line */
 .video__player {
   width: 100%;
   max-width: 100%;
-  margin: auto;
-  overflow: hidden;
+  margin-top: 2em;
 }
 
 .video__container {
   width: 100%;
   max-width: 100%;
   margin: auto;
-  margin-top: 10em;
+  padding: 5em 0 5em 0;
 }
 
-.video{
+.video {
   width: 100%;
 }
 
-@media(max-width: 599px) {
-  .valmynd{
+@media (max-width: 599px) {
+  .valmynd {
     display: block;
     width: 100%;
-    margin: 0, auto, 0, auto;
+    margin: 0, auto;
   }
 }
 
@@ -59,7 +58,8 @@ a { /* stylelint-disable-line */
   height: 100%;
   background: #000;
   opacity: 0.5;
-  display:flex;
+  display: flex;
+  position:relative;
 }
 
 .video__overlay__invisible {
@@ -72,14 +72,14 @@ a { /* stylelint-disable-line */
 }
 
 .play__button {
-  margin: auto auto;
-  height: 100%;
   width: 10%;
   left: 0;
   right: 0;
+  top: 0;
+  bottom: 0;
   position: absolute;
 }
 
 .video__title {
-  color: #FFF;
+  color: #fff;
 }
