@@ -23,13 +23,13 @@ a { /* stylelint-disable-line */
 
 .video__player {
   position: fixed;
+  position: relative;
+  z-index: -1;
   width: 100%;
   max-width: 100%;
   margin: auto;
-  overflow: hidden;
   margin-top: 10em;
-  position: relative;
-  z-index: -1;
+  overflow: hidden;
 }
 
 .video__container {
@@ -39,15 +39,15 @@ a { /* stylelint-disable-line */
   margin-top: 10em;
 }
 
-.video{
+.video {
   width: 100%;
 }
 
-@media(max-width: 599px) {
-  .valmynd{
+@media (max-width: 599px) {
+  .valmynd {
     display: block;
     width: 100%;
-    margin: 0, auto, 0, auto;
+    margin: 0, auto;
   }
 }
 
@@ -62,11 +62,11 @@ a { /* stylelint-disable-line */
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 999;
   width: 100%;
   height: 100%;
   background: #000;
   opacity: 0.5;
-  z-index: 999;
 }
 
 .invisible {
@@ -74,15 +74,15 @@ a { /* stylelint-disable-line */
 }
 
 .play__button {
-  margin: auto auto;
-  display: inline-block;
   position: absolute;
-  height: 100%;
-  width: 10%;
-  left: 0;
   right: 0;
+  left: 0;
+  display: inline-block;
+  width: 10%;
+  height: 100%;
+  margin: auto;
 }
 
 .video__title {
-  color: #FFF;
+  color: #fff;
 }
