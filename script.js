@@ -1,3 +1,5 @@
+/*eslint linebreak-style: ["error", "windows"]*/
+
 class Myndbandaleiga {
 
   // Hleður inn thumbnails: poster, title, date, undir hverju category fyrir sig.
@@ -12,49 +14,44 @@ class Myndbandaleiga {
   }
 
   reiknaDagsetningu(milliseconds) {
-    const days = Math.floor(milliseconds / (1000*60*60*24));
+    const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
 
     if (days < 7) {
-      return days + ' dögum';
+      return `${days} dögu`;
     } else if (days < 30) {
-      const weeks = Math.round(milliseconds / (1000*60*60*24*7));
+      const weeks = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 7));
       if (weeks === 1) {
-        return weeks + ' viku';
-      } else {
-        return weeks + ' vikum';
+        return `${weeks} viku`;
       }
+      return `${weeks} vikum`;
     } else if (days < 365) {
-      const month = Math.round(milliseconds / (1000*60*60*24*30));
+      const month = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 30));
       if (month === 1) {
-        return month + ' mánuði';
-      } else {
-        return month + ' mánuðum';
+        return `${month} mánuði`;
       }
-    } else {
-      const year = Math.round(milliseconds / (1000*60*60*24*365));
-      if (year === 1) {
-        return year + ' ári';
-      } else {
-        return year + ' árum';
-      }
+      return `${month} mánuðum`;
     }
+    const year = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 365));
+    if (year === 1) {
+      return `${year} ári`;
+    }
+    return `${year} árum`;
   }
 
-videoLength(time)
-  {
-      var hours = ~~(time / 3600);
-      var mins = ~~((time % 3600) / 60);
-      var secs = time % 60;
+  videoLength(time) {
+    var hours = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = time % 60;
 
-      var ret = "";
+    var ret = '';
 
-      if (hours > 0) {
-          ret += "" + hours + ":" + (mins < 10 ? "0" : "");
-      }
+    if (hours > 0) {
+      ret += '' + hours + ':' + (mins < 10 ? '0' : '');
+    }
 
-      ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-      ret += "" + secs;
-      return ret;
+    ret += '' + mins + ':' + (secs < 10 ? '0' : '');
+    ret += '' + secs;
+    return ret;
   }
 
   // Býr til category elements í HTML.
@@ -74,8 +71,7 @@ videoLength(time)
       const video = videos[key];
 
       posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' +
-       this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration)));
-      console.log(video.duration);
+        this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration)));
     }
 
     categoryDiv.appendChild(posterDiv);
@@ -103,11 +99,11 @@ videoLength(time)
     videoDate.textContent = date;
     videoDuration.textContent = time;
 
+    videoPoster.appendChild(videoDuration);
     videoPoster.appendChild(posterImg);
     videoPoster.appendChild(videoTitle);
     videoPoster.appendChild(breakElement);
     videoPoster.appendChild(videoDate);
-    videoPoster.appendChild(videoDuration);
 
     const target = posterImg;
     const wrap = document.createElement('a');

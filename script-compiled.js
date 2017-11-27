@@ -4,6 +4,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/*eslint linebreak-style: ["error", "windows"]*/
+
 var Myndbandaleiga = function () {
   function Myndbandaleiga() {
     _classCallCheck(this, Myndbandaleiga);
@@ -29,29 +31,25 @@ var Myndbandaleiga = function () {
       var days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
 
       if (days < 7) {
-        return days + ' dögum';
+        return days + ' d\xF6gu';
       } else if (days < 30) {
         var weeks = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 7));
         if (weeks === 1) {
           return weeks + ' viku';
-        } else {
-          return weeks + ' vikum';
         }
+        return weeks + ' vikum';
       } else if (days < 365) {
         var month = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 30));
         if (month === 1) {
-          return month + ' mánuði';
-        } else {
-          return month + ' mánuðum';
+          return month + ' m\xE1nu\xF0i';
         }
-      } else {
-        var year = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 365));
-        if (year === 1) {
-          return year + ' ári';
-        } else {
-          return year + ' árum';
-        }
+        return month + ' m\xE1nu\xF0um';
       }
+      var year = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 365));
+      if (year === 1) {
+        return year + ' \xE1ri';
+      }
+      return year + ' \xE1rum';
     }
   }, {
     key: 'videoLength',
@@ -60,14 +58,14 @@ var Myndbandaleiga = function () {
       var mins = ~~(time % 3600 / 60);
       var secs = time % 60;
 
-      var ret = "";
+      var ret = '';
 
       if (hours > 0) {
-        ret += "" + hours + ":" + (mins < 10 ? "0" : "");
+        ret += '' + hours + ':' + (mins < 10 ? '0' : '');
       }
 
-      ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-      ret += "" + secs;
+      ret += '' + mins + ':' + (secs < 10 ? '0' : '');
+      ret += '' + secs;
       return ret;
     }
 
@@ -90,7 +88,6 @@ var Myndbandaleiga = function () {
         var video = videos[key];
 
         posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration)));
-        console.log(video.duration);
       }
 
       categoryDiv.appendChild(posterDiv);
@@ -120,11 +117,11 @@ var Myndbandaleiga = function () {
       videoDate.textContent = date;
       videoDuration.textContent = time;
 
+      videoPoster.appendChild(videoDuration);
       videoPoster.appendChild(posterImg);
       videoPoster.appendChild(videoTitle);
       videoPoster.appendChild(breakElement);
       videoPoster.appendChild(videoDate);
-      videoPoster.appendChild(videoDuration);
 
       var target = posterImg;
       var wrap = document.createElement('a');
