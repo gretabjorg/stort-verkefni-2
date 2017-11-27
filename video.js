@@ -25,17 +25,32 @@ class MyndbandaSyning {
     request.send();
   }
 
+  playVideo() {
+    this.video.play();
+  }
+
+  hideDiv(div) {
+    div.classList.add('invisible');
+  }
+
   createPlayer() {
     if (this.video) {
       // Teikna upp video player med HTML sem er skilgreint nu thegar i videos.html
-      const videoContainer = document.createElement('div');
+      this.videoContainer = document.createElement('div');
+      this.videoOverlay = document.createElement('div');
+      this.videoPlayer = document.createElement('div');
       this.videoElement = document.createElement('video');
 
-      videoContainer.className = 'video__container';
+      this.videoContainer.className = 'video__container';
       this.videoElement.className = 'video';
+      this.videoOverlay.className = 'video__overlay';
+      this.videoPlayer.className = 'video__player';
 
+      this.videoPlayer.appendChild(this.videoElement);
       this.videoElement.src = this.video.video;
-      videoContainer.appendChild(this.videoElement);
+      this.videoPlayer.appendChild(this.videoOverlay);
+      this.videoContainer.appendChild(this.videoPlayer);
+
 
       const objectDiv = document.createElement('div');
       const objBack = document.createElement('img');
@@ -49,7 +64,7 @@ class MyndbandaSyning {
       objectDiv.className = 'valmynd';
       objBack.className = 'imgValmynd';
       objPause.className = 'imgValmynd';
-      objPlay.className = 'imgValmynd';
+      objPlay.className = 'play__button';
       objUnmute.className = 'imgValmynd';
       objMute.className = 'imgValmynd';
       objFullscreen.className = 'imgValmynd';
@@ -73,13 +88,18 @@ class MyndbandaSyning {
 
       objectDiv.appendChild(objBack);
       objectDiv.appendChild(objPause);
-      objectDiv.appendChild(objPlay);
+      this.videoOverlay.appendChild(objPlay);
       objectDiv.appendChild(objUnmute);
       objectDiv.appendChild(objMute);
       objectDiv.appendChild(objFullscreen);
       objectDiv.appendChild(objNext);
 
-      this.container.appendChild(videoContainer);
+      objPlay.addEventListener('click', () => {
+        this.playVideo();
+        this.hideDiv(this.videoOverlay);
+      });
+
+      this.container.appendChild(this.videoContainer);
       this.container.appendChild(objectDiv);
     } else {
       const errorContainer = document.createElement('div');
@@ -103,6 +123,7 @@ class MyndbandaSyning {
     tilbakaDiv.appendChild(linkur);
 
     this.container.appendChild(tilbakaDiv);
+
   }
 
   parseVideosJson(e) {

@@ -4,6 +4,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/*eslint linebreak-style: ["error", "windows"]*/
+
 var MyndbandaSyning = function () {
   function MyndbandaSyning() {
     _classCallCheck(this, MyndbandaSyning);
@@ -35,18 +37,36 @@ var MyndbandaSyning = function () {
       request.send();
     }
   }, {
+    key: 'playVideo',
+    value: function playVideo() {
+      this.video.play();
+    }
+  }, {
+    key: 'hideDiv',
+    value: function hideDiv(div) {
+      div.classList.add('invisible');
+    }
+  }, {
     key: 'createPlayer',
     value: function createPlayer() {
+      var _this = this;
+
       if (this.video) {
         // Teikna upp video player med HTML sem er skilgreint nu thegar i videos.html
-        var videoContainer = document.createElement('div');
+        this.videoContainer = document.createElement('div');
+        this.videoOverlay = document.createElement('div');
+        this.videoPlayer = document.createElement('div');
         this.videoElement = document.createElement('video');
 
-        videoContainer.className = 'video__container';
+        this.videoContainer.className = 'video__container';
         this.videoElement.className = 'video';
+        this.videoOverlay.className = 'video__overlay';
+        this.videoPlayer.className = 'video__player';
 
+        this.videoPlayer.appendChild(this.videoElement);
         this.videoElement.src = this.video.video;
-        videoContainer.appendChild(this.videoElement);
+        this.videoPlayer.appendChild(this.videoOverlay);
+        this.videoContainer.appendChild(this.videoPlayer);
 
         var objectDiv = document.createElement('div');
         var objBack = document.createElement('img');
@@ -60,7 +80,7 @@ var MyndbandaSyning = function () {
         objectDiv.className = 'valmynd';
         objBack.className = 'imgValmynd';
         objPause.className = 'imgValmynd';
-        objPlay.className = 'imgValmynd';
+        objPlay.className = 'play__button';
         objUnmute.className = 'imgValmynd';
         objMute.className = 'imgValmynd';
         objFullscreen.className = 'imgValmynd';
@@ -84,13 +104,18 @@ var MyndbandaSyning = function () {
 
         objectDiv.appendChild(objBack);
         objectDiv.appendChild(objPause);
-        objectDiv.appendChild(objPlay);
+        this.videoOverlay.appendChild(objPlay);
         objectDiv.appendChild(objUnmute);
         objectDiv.appendChild(objMute);
         objectDiv.appendChild(objFullscreen);
         objectDiv.appendChild(objNext);
 
-        this.container.appendChild(videoContainer);
+        objPlay.addEventListener('click', function () {
+          _this.playVideo();
+          _this.hideDiv(_this.videoOverlay);
+        });
+
+        this.container.appendChild(this.videoContainer);
         this.container.appendChild(objectDiv);
       } else {
         var errorContainer = document.createElement('div');
