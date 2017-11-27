@@ -38,8 +38,9 @@ var MyndbandaSyning = function () {
     }
   }, {
     key: 'playVideo',
-    value: function playVideo() {
-      this.video.play();
+    value: function playVideo(element) {
+      element.play();
+      // this.hideDiv(this.videoOverlay);
     }
   }, {
     key: 'hideDiv',
@@ -48,9 +49,13 @@ var MyndbandaSyning = function () {
     }
   }, {
     key: 'createPlayer',
+<<<<<<< HEAD
     value: function createPlayer(title) {
       var _this = this;
 
+=======
+    value: function createPlayer() {
+>>>>>>> db4e2838644fa498fc7bc640e2253b9229e14dac
       if (this.video) {
         // Teikna upp video player med HTML sem er skilgreint nu thegar i videos.html
         this.videoContainer = document.createElement('div');
@@ -115,10 +120,9 @@ var MyndbandaSyning = function () {
         objectDiv.appendChild(objFullscreen);
         objectDiv.appendChild(objNext);
 
-        objPlay.addEventListener('click', function () {
-          _this.playVideo();
-          _this.hideDiv(_this.videoOverlay);
-        });
+        this.videoElement.pause();
+
+        this.videoOverlay.addEventListener('click', this.videoElement.play());
 
         this.container.appendChild(this.videoContainer);
         this.container.appendChild(objectDiv);

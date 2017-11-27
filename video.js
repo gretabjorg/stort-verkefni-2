@@ -25,8 +25,9 @@ class MyndbandaSyning {
     request.send();
   }
 
-  playVideo() {
-    this.video.play();
+  playVideo(element) {
+    element.play();
+    // this.hideDiv(this.videoOverlay);
   }
 
   hideDiv(div) {
@@ -99,10 +100,9 @@ class MyndbandaSyning {
       objectDiv.appendChild(objFullscreen);
       objectDiv.appendChild(objNext);
 
-      objPlay.addEventListener('click', () => {
-        this.playVideo();
-        this.hideDiv(this.videoOverlay);
-      });
+      this.videoElement.pause();
+
+      this.videoOverlay.addEventListener('click', this.videoElement.play());
 
       this.container.appendChild(this.videoContainer);
       this.container.appendChild(objectDiv);
@@ -128,7 +128,6 @@ class MyndbandaSyning {
     tilbakaDiv.appendChild(linkur);
 
     this.container.appendChild(tilbakaDiv);
-
   }
 
   parseVideosJson(e) {
