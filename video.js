@@ -33,19 +33,24 @@ class MyndbandaSyning {
     div.classList.add('invisible');
   }
 
-  createPlayer() {
+  createPlayer(title) {
     if (this.video) {
       // Teikna upp video player med HTML sem er skilgreint nu thegar i videos.html
       this.videoContainer = document.createElement('div');
+      this.videoTitle = document.createElement('h2');
       this.videoOverlay = document.createElement('div');
       this.videoPlayer = document.createElement('div');
       this.videoElement = document.createElement('video');
 
       this.videoContainer.className = 'video__container';
+      this.videoTitle.className = 'video__title';
       this.videoElement.className = 'video';
       this.videoOverlay.className = 'video__overlay';
       this.videoPlayer.className = 'video__player';
 
+      this.videoTitle.textContent = title;
+
+      this.videoContainer.appendChild(this.videoTitle);
       this.videoPlayer.appendChild(this.videoElement);
       this.videoElement.src = this.video.video;
       this.videoPlayer.appendChild(this.videoOverlay);
