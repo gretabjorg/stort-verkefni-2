@@ -49,7 +49,7 @@ class MyndbandaSyning {
       this.videoOverlay.className = 'video__overlay';
       this.videoPlayer.className = 'video__player';
 
-      this.videoTitle.textContent = title;
+      this.videoTitle.textContent = this.video.title;
 
       this.videoContainer.appendChild(this.videoTitle);
       this.videoPlayer.appendChild(this.videoElement);
