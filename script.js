@@ -40,21 +40,21 @@ class Myndbandaleiga {
     }
   }
 
-videoLength(time)
+  videoLength(time)
   {
-      var hours = ~~(time / 3600);
-      var mins = ~~((time % 3600) / 60);
-      var secs = time % 60;
+    var hours = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = time % 60;
 
-      var ret = "";
+    var ret = "";
 
-      if (hours > 0) {
-          ret += "" + hours + ":" + (mins < 10 ? "0" : "");
-      }
+    if (hours > 0) {
+      ret += "" + hours + ":" + (mins < 10 ? "0" : "");
+    }
 
-      ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-      ret += "" + secs;
-      return ret;
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
   }
 
   // Býr til category elements í HTML.
@@ -74,8 +74,8 @@ videoLength(time)
       const video = videos[key];
 
       posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' +
-       this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration)));
-      console.log(video.duration);
+        this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration),
+        video.id));
     }
 
     categoryDiv.appendChild(posterDiv);
@@ -84,7 +84,7 @@ videoLength(time)
 
   // Býr til poster elements i HTML.
 
-  createPoster(image, title, date, time) {
+  createPoster(image, title, date, time, videoId) {
     const videoPoster = document.createElement('div');
     const posterImg = document.createElement('img');
     const videoTitle = document.createElement('span');
@@ -111,7 +111,7 @@ videoLength(time)
 
     const target = posterImg;
     const wrap = document.createElement('a');
-    wrap.setAttribute('href', 'video.html');
+    wrap.setAttribute('href', 'video.html?id=' + videoId);
 
     target.parentNode.replaceChild(wrap, target);
     wrap.appendChild(target);

@@ -89,8 +89,7 @@ var Myndbandaleiga = function () {
       for (var key in videos) {
         var video = videos[key];
 
-        posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration)));
-        console.log(video.duration);
+        posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration), video.id));
       }
 
       categoryDiv.appendChild(posterDiv);
@@ -101,7 +100,7 @@ var Myndbandaleiga = function () {
 
   }, {
     key: 'createPoster',
-    value: function createPoster(image, title, date, time) {
+    value: function createPoster(image, title, date, time, videoId) {
       var videoPoster = document.createElement('div');
       var posterImg = document.createElement('img');
       var videoTitle = document.createElement('span');
@@ -128,7 +127,7 @@ var Myndbandaleiga = function () {
 
       var target = posterImg;
       var wrap = document.createElement('a');
-      wrap.setAttribute('href', 'video.html');
+      wrap.setAttribute('href', 'video.html?id=' + videoId);
 
       target.parentNode.replaceChild(wrap, target);
       wrap.appendChild(target);
