@@ -1,18 +1,37 @@
-'use strict';
+"use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function() {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function(Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 /*eslint linebreak-style: ["error", "windows"]*/
 
-var Myndbandaleiga = function () {
+var Myndbandaleiga = function() {
   function Myndbandaleiga() {
     _classCallCheck(this, Myndbandaleiga);
   }
 
   _createClass(Myndbandaleiga, [{
-    key: 'load',
+    key: "load",
 
 
     // Hleður inn thumbnails: poster, title, date, undir hverju category fyrir sig.
@@ -26,53 +45,53 @@ var Myndbandaleiga = function () {
       this.loadVideos();
     }
   }, {
-    key: 'reiknaDagsetningu',
+    key: "reiknaDagsetningu",
     value: function reiknaDagsetningu(milliseconds) {
       var days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
 
       if (days < 7) {
-        return days + ' d\xF6gu';
+        return days + " d\xF6gu";
       } else if (days < 30) {
         var weeks = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 7));
         if (weeks === 1) {
-          return weeks + ' viku';
+          return weeks + " viku";
         }
-        return weeks + ' vikum';
+        return weeks + " vikum";
       } else if (days < 365) {
         var month = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 30));
         if (month === 1) {
-          return month + ' m\xE1nu\xF0i';
+          return month + " m\xE1nu\xF0i";
         }
-        return month + ' m\xE1nu\xF0um';
+        return month + " m\xE1nu\xF0um";
       }
       var year = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 365));
       if (year === 1) {
-        return year + ' \xE1ri';
+        return year + " \xE1ri";
       }
-      return year + ' \xE1rum';
+      return year + " \xE1rum";
     }
   }, {
-    key: 'videoLength',
+    key: "videoLength",
     value: function videoLength(time) {
       var hours = ~~(time / 3600);
       var mins = ~~(time % 3600 / 60);
       var secs = time % 60;
 
-      var ret = '';
+      var ret = "";
 
       if (hours > 0) {
-        ret += '' + hours + ':' + (mins < 10 ? '0' : '');
+        ret += "" + hours + ":" + (mins < 10 ? "0" : "");
       }
 
-      ret += '' + mins + ':' + (secs < 10 ? '0' : '');
-      ret += '' + secs;
+      ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+      ret += "" + secs;
       return ret;
     }
 
     // Býr til category elements í HTML.
 
   }, {
-    key: 'createVideoCategory',
+    key: "createVideoCategory",
     value: function createVideoCategory(title, videos) {
       var categoryDiv = document.createElement('div');
       var category = document.createElement('h2');
@@ -87,7 +106,7 @@ var Myndbandaleiga = function () {
       for (var key in videos) {
         var video = videos[key];
 
-        posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration)));
+        posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration), video.id));
       }
 
       categoryDiv.appendChild(posterDiv);
@@ -97,8 +116,8 @@ var Myndbandaleiga = function () {
     // Býr til poster elements i HTML.
 
   }, {
-    key: 'createPoster',
-    value: function createPoster(image, title, date, time) {
+    key: "createPoster",
+    value: function createPoster(image, title, date, time, videoId) {
       var videoPoster = document.createElement('div');
       var posterImg = document.createElement('img');
       var videoTitle = document.createElement('span');
@@ -125,7 +144,7 @@ var Myndbandaleiga = function () {
 
       var target = posterImg;
       var wrap = document.createElement('a');
-      wrap.setAttribute('href', 'video.html');
+      wrap.setAttribute('href', 'video.html?id=' + videoId);
 
       target.parentNode.replaceChild(wrap, target);
       wrap.appendChild(target);
@@ -133,14 +152,14 @@ var Myndbandaleiga = function () {
       return videoPoster;
     }
   }, {
-    key: 'loadVideos',
+    key: "loadVideos",
     value: function loadVideos() {
       var request = new XMLHttpRequest();
 
       request.open('GET', './videos.json', true);
       request.onload = this.parseVideosJson.bind(this);
 
-      request.onerror = function () {
+      request.onerror = function() {
         console.error('Óþekkt villa');
         results.appendChild(document.createTextNode('Óþekkt villa'));
       };
@@ -148,7 +167,7 @@ var Myndbandaleiga = function () {
       request.send();
     }
   }, {
-    key: 'parseVideosJson',
+    key: "parseVideosJson",
     value: function parseVideosJson(e) {
       var request = e.target;
       if (request.status >= 200 && request.status < 400) {
@@ -175,7 +194,7 @@ var Myndbandaleiga = function () {
   return Myndbandaleiga;
 }();
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
   var myndbond = new Myndbandaleiga();
   myndbond.load();
 });
