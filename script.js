@@ -40,6 +40,23 @@ class Myndbandaleiga {
     }
   }
 
+videoLength(time)
+  {
+      var hours = ~~(time / 3600);
+      var mins = ~~((time % 3600) / 60);
+      var secs = time % 60;
+
+      var ret = "";
+
+      if (hours > 0) {
+          ret += "" + hours + ":" + (mins < 10 ? "0" : "");
+      }
+
+      ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+      ret += "" + secs;
+      return ret;
+  }
+
   // Býr til category elements í HTML.
 
   createVideoCategory(title, videos) {
@@ -56,8 +73,9 @@ class Myndbandaleiga {
     for (const key in videos) {
       const video = videos[key];
 
-      posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan'));
-      console.log((Date.now() - video.created));
+      posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' +
+       this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration)));
+      console.log(video.duration);
     }
 
     categoryDiv.appendChild(posterDiv);
@@ -66,26 +84,30 @@ class Myndbandaleiga {
 
   // Býr til poster elements i HTML.
 
-  createPoster(image, title, date) {
+  createPoster(image, title, date, time) {
     const videoPoster = document.createElement('div');
     const posterImg = document.createElement('img');
     const videoTitle = document.createElement('span');
     const breakElement = document.createElement('br');
     const videoDate = document.createElement('span');
+    const videoDuration = document.createElement('p');
 
     videoPoster.className = 'video__poster';
     posterImg.className = 'poster__img';
     videoTitle.className = 'video__title';
     videoDate.className = 'video__date';
+    videoDuration.className = 'video__duration';
 
     posterImg.src = image;
     videoTitle.textContent = title;
     videoDate.textContent = date;
+    videoDuration.textContent = time;
 
     videoPoster.appendChild(posterImg);
     videoPoster.appendChild(videoTitle);
     videoPoster.appendChild(breakElement);
     videoPoster.appendChild(videoDate);
+    videoPoster.appendChild(videoDuration);
 
     const target = posterImg;
     const wrap = document.createElement('a');

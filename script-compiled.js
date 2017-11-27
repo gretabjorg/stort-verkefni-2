@@ -53,6 +53,23 @@ var Myndbandaleiga = function () {
         }
       }
     }
+  }, {
+    key: 'videoLength',
+    value: function videoLength(time) {
+      var hours = ~~(time / 3600);
+      var mins = ~~(time % 3600 / 60);
+      var secs = time % 60;
+
+      var ret = "";
+
+      if (hours > 0) {
+        ret += "" + hours + ":" + (mins < 10 ? "0" : "");
+      }
+
+      ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+      ret += "" + secs;
+      return ret;
+    }
 
     // Býr til category elements í HTML.
 
@@ -72,8 +89,8 @@ var Myndbandaleiga = function () {
       for (var key in videos) {
         var video = videos[key];
 
-        posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan'));
-        console.log(Date.now() - video.created);
+        posterDiv.appendChild(this.createPoster(video.poster, video.title, 'Fyrir ' + this.reiknaDagsetningu(Date.now() - video.created) + ' síðan', this.videoLength(video.duration)));
+        console.log(video.duration);
       }
 
       categoryDiv.appendChild(posterDiv);
@@ -84,26 +101,30 @@ var Myndbandaleiga = function () {
 
   }, {
     key: 'createPoster',
-    value: function createPoster(image, title, date) {
+    value: function createPoster(image, title, date, time) {
       var videoPoster = document.createElement('div');
       var posterImg = document.createElement('img');
       var videoTitle = document.createElement('span');
       var breakElement = document.createElement('br');
       var videoDate = document.createElement('span');
+      var videoDuration = document.createElement('p');
 
       videoPoster.className = 'video__poster';
       posterImg.className = 'poster__img';
       videoTitle.className = 'video__title';
       videoDate.className = 'video__date';
+      videoDuration.className = 'video__duration';
 
       posterImg.src = image;
       videoTitle.textContent = title;
       videoDate.textContent = date;
+      videoDuration.textContent = time;
 
       videoPoster.appendChild(posterImg);
       videoPoster.appendChild(videoTitle);
       videoPoster.appendChild(breakElement);
       videoPoster.appendChild(videoDate);
+      videoPoster.appendChild(videoDuration);
 
       var target = posterImg;
       var wrap = document.createElement('a');

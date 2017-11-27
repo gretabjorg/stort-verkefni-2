@@ -1,4 +1,6 @@
 .video__category {
+  border-bottom: 0.5px solid #eee;
+  margin-bottom: 1em;
 }
 
 .video__posters {
@@ -9,11 +11,13 @@
 
 .video__poster {
   margin: 2em;
-  width: 25+%;
+  width: 25%;
   height: auto;
 }
 
 .poster__img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   margin-bottom: 1em;
   object-fit: cover;
@@ -31,9 +35,23 @@
 
 .video__title {
   color: #FFF;
+  overflow: hidden;
   text-overflow: clip;
   display: block;
   white-space: nowrap;
-  font-size: 1.25em;
   font-weight: bold;
+}
+
+.video__duration {
+  position: absolute;
+  z-index: 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+@media(max-width: 599px) {
+  .video__poster {
+    width: 100%;
+  }
 }

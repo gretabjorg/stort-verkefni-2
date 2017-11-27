@@ -25,3 +25,11 @@ a { /* stylelint-disable-line */
 .video{
   width: 100%;
 }
+
+@media(max-width: 599px) {
+  .valmynd{
+    display: block;
+    width: 100%;
+    margin: 0, auto, 0, auto;
+  }
+}
