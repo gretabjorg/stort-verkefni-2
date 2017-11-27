@@ -17,7 +17,7 @@ class Myndbandaleiga {
     const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
 
     if (days < 7) {
-      return `${days} dögu`;
+      return `${days} dögum`;
     } else if (days < 30) {
       const weeks = Math.round(milliseconds / (1000 * 60 * 60 * 24 * 7));
       if (weeks === 1) {

@@ -38,9 +38,16 @@ var MyndbandaSyning = function () {
     }
   }, {
     key: 'playVideo',
-    value: function playVideo(element) {
-      element.play();
-      // this.hideDiv(this.videoOverlay);
+    value: function playVideo() {
+      if (this.videoElement.currentTime > 0 && this.videoElement.paused === false && this.videoElement.ended === false) {
+        this.videoElement.pause();
+        this.videoOverlay.className = 'video__overlay';
+        this.objPlay.className = 'play__button';
+      } else {
+        this.videoElement.play();
+        this.videoOverlay.className = 'video__overlay video__overlay__invisible ';
+        this.objPlay.className = 'play__button invisible';
+      }
     }
   }, {
     key: 'hideDiv',
@@ -66,8 +73,10 @@ var MyndbandaSyning = function () {
 
         this.videoTitle.textContent = this.video.title;
 
+        this.videoOverlay.addEventListener('click', this.playVideo.bind(this));
+
         this.videoContainer.appendChild(this.videoTitle);
-        this.videoPlayer.appendChild(this.videoElement);
+        this.videoOverlay.appendChild(this.videoElement);
         this.videoElement.src = this.video.video;
         this.videoPlayer.appendChild(this.videoOverlay);
         this.videoContainer.appendChild(this.videoPlayer);
@@ -75,7 +84,7 @@ var MyndbandaSyning = function () {
         var objectDiv = document.createElement('div');
         var objBack = document.createElement('img');
         var objPause = document.createElement('img');
-        var objPlay = document.createElement('img');
+        this.objPlay = document.createElement('img');
         var objUnmute = document.createElement('img');
         var objMute = document.createElement('img');
         var objFullscreen = document.createElement('img');
@@ -84,7 +93,7 @@ var MyndbandaSyning = function () {
         objectDiv.className = 'valmynd';
         objBack.className = 'imgValmynd';
         objPause.className = 'imgValmynd';
-        objPlay.className = 'play__button';
+        this.objPlay.className = 'play__button';
         objUnmute.className = 'imgValmynd';
         objMute.className = 'imgValmynd';
         objFullscreen.className = 'imgValmynd';
@@ -92,7 +101,7 @@ var MyndbandaSyning = function () {
 
         objBack.id = 'back__button';
         objPause.id = 'pause__button';
-        objPlay.id = 'play__button';
+        this.objPlay.id = 'play__button';
         objUnmute.id = 'unmute__button';
         objMute.id = 'mute__button';
         objFullscreen.id = 'fullscreen__button';
@@ -100,7 +109,7 @@ var MyndbandaSyning = function () {
 
         objBack.src = 'img/back.svg';
         objPause.src = 'img/pause.svg';
-        objPlay.src = 'img/play.svg';
+        this.objPlay.src = 'img/play.svg';
         objUnmute.src = 'img/unmute.svg';
         objMute.src = 'img/mute.svg';
         objFullscreen.src = 'img/fullscreen.svg';
@@ -108,15 +117,13 @@ var MyndbandaSyning = function () {
 
         objectDiv.appendChild(objBack);
         objectDiv.appendChild(objPause);
-        this.videoOverlay.appendChild(objPlay);
+        this.videoOverlay.appendChild(this.objPlay);
         objectDiv.appendChild(objUnmute);
         objectDiv.appendChild(objMute);
         objectDiv.appendChild(objFullscreen);
         objectDiv.appendChild(objNext);
 
         this.videoElement.pause();
-
-        this.videoOverlay.addEventListener('click', this.videoElement.play());
 
         this.container.appendChild(this.videoContainer);
         this.container.appendChild(objectDiv);

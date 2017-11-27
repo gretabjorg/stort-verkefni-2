@@ -22,14 +22,10 @@ a { /* stylelint-disable-line */
 }
 
 .video__player {
-  position: fixed;
   width: 100%;
   max-width: 100%;
   margin: auto;
   overflow: hidden;
-  margin-top: 10em;
-  position: relative;
-  z-index: -1;
 }
 
 .video__container {
@@ -59,14 +55,16 @@ a { /* stylelint-disable-line */
 }
 
 .video__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: #000;
   opacity: 0.5;
-  z-index: 999;
+  display:flex;
+}
+
+.video__overlay__invisible {
+  opacity: 1;
+  background-color: transparent;
 }
 
 .invisible {
@@ -75,12 +73,11 @@ a { /* stylelint-disable-line */
 
 .play__button {
   margin: auto auto;
-  display: inline-block;
-  position: absolute;
   height: 100%;
   width: 10%;
   left: 0;
   right: 0;
+  position: absolute;
 }
 
 .video__title {
