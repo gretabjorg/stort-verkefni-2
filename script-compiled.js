@@ -14,8 +14,8 @@ var Myndbandaleiga = function () {
 
 
     // Hleður inn thumbnails: poster, title, date, undir hverju category fyrir sig.
-    // TODO: Setja link á poster sem hleður inn öðrum glugga => media palyer.
     // TODO: Bua til videos ut fra videos.json
+    // TODO: láta controls takka virka á spilað video.
 
     value: function load() {
       this.container = document.querySelector('main');
