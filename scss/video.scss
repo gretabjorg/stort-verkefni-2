@@ -27,13 +27,13 @@ a { /* stylelint-disable-line */
 
 .video__player {
   width: 100%;
-  max-width: 100%;
+  max-width: 1000px;
   margin-top: 2em;
 }
 
 .video__container {
   width: 100%;
-  max-width: 100%;
+  max-width: 1000px;
   padding: 5em 0;
   margin: auto;
 }
@@ -60,7 +60,7 @@ a { /* stylelint-disable-line */
 .video__overlay {
   position: relative;
   display: flex;
-  width: 100%;
+  width: 1000px;
   height: 100%;
   background: #000;
   opacity: 0.5;
