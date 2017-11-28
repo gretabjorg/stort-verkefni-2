@@ -1,7 +1,7 @@
-/*eslint linebreak-style: ["error", "windows"]*/
+/* eslint linebreak-style: ["error", "windows"] */
+/* slint func-names: ["error", "never"] */
 
 class MyndbandaSyning {
-
   load() {
     this.container = document.querySelector('main');
     // video id er substrengur get strengs fra 4. staf
@@ -17,10 +17,10 @@ class MyndbandaSyning {
     request.open('GET', './videos.json', true);
     request.onload = this.parseVideosJson.bind(this);
 
-    request.onerror = function() {
-      console.error('Óþekkt villa');
+    request.onerror = function () {
+      window.error('Óþekkt villa');
       results.appendChild(document.createTextNode('Óþekkt villa'));
-    }
+    };
 
     request.send();
   }
@@ -161,7 +161,7 @@ class MyndbandaSyning {
     document.getElementById('fullscreen__button').addEventListener('click', this.fullscreenVideo.bind(this));
     document.getElementById('next__button').addEventListener('click', this.nextVideo.bind(this));
     document.getElementById('back__button').addEventListener('click', this.backVideo.bind(this));
-}
+  }
 
   parseVideosJson(e) {
     const request = e.target;

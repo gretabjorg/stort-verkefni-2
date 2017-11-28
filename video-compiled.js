@@ -4,7 +4,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/*eslint linebreak-style: ["error", "windows"]*/
+/* eslint linebreak-style: ["error", "windows"] */
+/* slint func-names: ["error", "never"] */
 
 var MyndbandaSyning = function () {
   function MyndbandaSyning() {
@@ -30,7 +31,7 @@ var MyndbandaSyning = function () {
       request.onload = this.parseVideosJson.bind(this);
 
       request.onerror = function () {
-        console.error('Óþekkt villa');
+        window.error('Óþekkt villa');
         results.appendChild(document.createTextNode('Óþekkt villa'));
       };
 
