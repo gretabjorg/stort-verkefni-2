@@ -102,7 +102,6 @@ var Myndbandaleiga = function () {
       var videoPoster = document.createElement('div');
       var posterImg = document.createElement('img');
       var videoTitle = document.createElement('span');
-      var breakElement = document.createElement('br');
       var videoDate = document.createElement('span');
       var videoDuration = document.createElement('p');
 
@@ -120,7 +119,6 @@ var Myndbandaleiga = function () {
       videoPoster.appendChild(videoDuration);
       videoPoster.appendChild(posterImg);
       videoPoster.appendChild(videoTitle);
-      videoPoster.appendChild(breakElement);
       videoPoster.appendChild(videoDate);
 
       var target = posterImg;

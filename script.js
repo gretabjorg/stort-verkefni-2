@@ -85,7 +85,6 @@ class Myndbandaleiga {
     const videoPoster = document.createElement('div');
     const posterImg = document.createElement('img');
     const videoTitle = document.createElement('span');
-    const breakElement = document.createElement('br');
     const videoDate = document.createElement('span');
     const videoDuration = document.createElement('p');
 
@@ -103,7 +102,6 @@ class Myndbandaleiga {
     videoPoster.appendChild(videoDuration);
     videoPoster.appendChild(posterImg);
     videoPoster.appendChild(videoTitle);
-    videoPoster.appendChild(breakElement);
     videoPoster.appendChild(videoDate);
 
     const target = posterImg;
